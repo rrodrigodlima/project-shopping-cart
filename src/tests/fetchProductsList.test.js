@@ -4,12 +4,12 @@ import computadorSearch from './mocks/search';
 
 // implemente seus testes aqui
 describe('Teste a função fetchProductsList', () => {
-  it('fetchProductsList é uma função', () => {
+  it('é uma função', () => {
     expect(typeof fetchProductsList).toBe('function');
   
   });
 
-  it('fetch é chamado ao executar fetchProductsList', async () => {
+  it('é chamada ao executar fetchProductsList', async () => {
     await fetchProductsList('computador');
     expect(fetch).toHaveBeenCalled();
   });
@@ -19,7 +19,7 @@ describe('Teste a função fetchProductsList', () => {
     expect(fetch).toHaveBeenCalledWith('https://api.mercadolibre.com/sites/MLB/search?q=computador');
   });
 
-  it('Teste se o retorno da função', async () => {
+  it('retorna os dados', async () => {
     const data = await fetchProductsList('computador');
     expect(data).toEqual(computadorSearch);
   });

@@ -4,11 +4,29 @@ import { createProductElement } from './helpers/shopFunctions';
 import './style.css';
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
+const productsSection = document.getElementsByClassName('products')[0];
+const loading = document.getElementsByClassName('loading')[0];
 
-const callData = fetchProductsList('computador');
-const productsSection = document.getElementsByClassName('products');
+function callData(query) {
+  const productList = fetchProductsList(query);
+  loading.innerHTML = 'carregando...';
+  productList.then((results) => {
+    results.map((product) => {
+      productsSection
+        .appendChild(createProductElement(product));
+      loading.remove();
+      return '';
+    });
+  });
+  return productList;
+}
 
-callData.then((results) => {
-  results.map((product) => productsSection[0]
-    .appendChild(createProductElement(product)));
-});
+const fetchError = () => {
+  try {
+    callData('computador');
+  } catch (error) {
+    loading.innerHTML = 'Algum erro ocorreu, recarregue a página e tente novamente';
+  }
+};
+
+fetchError();

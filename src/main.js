@@ -1,4 +1,4 @@
-import { saveCartID } from './helpers/cartFunctions';
+import { getSavedCartIDs, saveCartID } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
@@ -51,3 +51,10 @@ const fetchError = () => {
 };
 
 fetchError();
+
+window.onload = async () => {
+  getSavedCartIDs().map(async (element) => {
+    const recover = await fetchProduct(element);
+    Promise.all(cartSection.appendChild(createCartProductElement(recover)));
+  });
+};

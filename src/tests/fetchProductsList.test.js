@@ -24,6 +24,6 @@ describe('Teste a função fetchProductsList', () => {
     expect(data).toEqual(computadorSearch);
   });
   it('Teste, se ao chamar a função sem argumento retorna erro', async () => {
-    expect(() => fetchProductsList).toThrowError('Termo de busca não informado')
+    expect(() => fetchProductsList()).rejects.toThrowError('Termo de busca não informado')
   })
 });
